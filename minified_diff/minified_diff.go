@@ -1,7 +1,6 @@
 package minified_diff
 
 import (
-	"fmt"
 	"github.com/ditashi/jsbeautifier-go/jsbeautifier"
 	"github.com/sergi/go-diff/diffmatchpatch"
 )
@@ -19,12 +18,13 @@ func lineDiff(src1, src2 string) []diffmatchpatch.Diff {
 	return result
 }
 
-func formatDiff(diff []diffmatchpatch.Diff) {
-	fmt.Println(diff)
+func formatDiff(diff []diffmatchpatch.Diff) *string {
+	result := "Sample result"
+	return &result
 }
 
-func MinifiedDiff(file1 string, file2 string) {
+func MinifiedDiff(file1 string, file2 string) *string {
 	src1 := beautify(file1)
 	src2 := beautify(file2)
-	formatDiff(lineDiff(*src1, *src2))
+	return formatDiff(lineDiff(*src1, *src2))
 }

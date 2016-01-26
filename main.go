@@ -38,7 +38,9 @@ func main() {
 			os.Exit(1)
 		}
 
-		minified_diff.MinifiedDiff(file1, file2)
+		result := minified_diff.MinifiedDiff(file1, file2)
+		fmt.Print(*result)
+
 	}
 
 	app.Run(os.Args)
