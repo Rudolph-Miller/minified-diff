@@ -3,6 +3,7 @@ package minified_diff
 import (
 	"github.com/ditashi/jsbeautifier-go/jsbeautifier"
 	"github.com/sergi/go-diff/diffmatchpatch"
+	"strings"
 )
 
 func beautify(src string) *string {
@@ -18,8 +19,28 @@ func lineDiff(src1, src2 string) []diffmatchpatch.Diff {
 	return result
 }
 
-func formatDiff(diff []diffmatchpatch.Diff) *string {
-	result := "Sample result"
+func prefix(c diffmatchpatch.Operation) string {
+	switch c {
+	case diffmatchpatch.DiffEqual:
+		return " "
+	case diffmatchpatch.DiffInsert:
+		return "+"
+	case diffmatchpatch.DiffDelete:
+		return "-"
+	}
+	return " "
+}
+
+func formatDiff(lineDiff []diffmatchpatch.Diff) *string {
+	result := ""
+	for _, diff := range lineDiff {
+		texts := strings.Split(diff.Text, "\n")
+		for _, text := range texts {
+			result += prefix(diff.Type)
+			result += text
+			result += "\n"
+		}
+	}
 	return &result
 }
 
