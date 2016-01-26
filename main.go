@@ -7,6 +7,11 @@ import (
 	"os"
 )
 
+func notExists(name string) bool {
+	_, err := os.Stat(name)
+	return os.IsNotExist(err)
+}
+
 func main() {
 	app := cli.NewApp()
 	app.Name = "minified-diff"
@@ -22,6 +27,16 @@ func main() {
 
 		file1 := args[0]
 		file2 := args[1]
+
+		if notExists(file1) {
+			fmt.Println("First file does not exist")
+			os.Exit(1)
+		}
+
+		if notExists(file2) {
+			fmt.Println("Second file does not exist")
+			os.Exit(1)
+		}
 
 		result := minified_diff.MinifiedDiff(file1, file2)
 		fmt.Print(*result)
