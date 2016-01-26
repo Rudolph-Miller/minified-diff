@@ -31,3 +31,8 @@ $ minified-diff test/sample1 test/sample2
 -text1
 +text2
 ```
+
+```sh
+$ minified-diff test/sample1 test/sample2 | grep '^+'
+text2
+```
