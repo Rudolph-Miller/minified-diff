@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"github.com/Rudolph-Miller/minified-diff/minified_diff"
 	"github.com/codegangsta/cli"
 	"os"
 )
@@ -12,12 +14,17 @@ func main() {
 	app.Version = "0.0.1"
 
 	app.Action = func(c *cli.Context) {
-		if len(c.Args()) < 2 {
-			println("Please specify files")
+		args := c.Args()
+		if len(args) < 2 {
+			fmt.Println("Please specify two files.")
 			os.Exit(1)
 		}
 
-		println("Hello")
+		file1 := args[0]
+		file2 := args[1]
+
+		result := minified_diff.MinifiedDiff(file1, file2)
+		fmt.Print(*result)
 	}
 
 	app.Run(os.Args)
