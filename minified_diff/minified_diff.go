@@ -36,9 +36,11 @@ func formatDiff(lineDiff []diffmatchpatch.Diff) *string {
 	for _, diff := range lineDiff {
 		texts := strings.Split(diff.Text, "\n")
 		for _, text := range texts {
-			result += prefix(diff.Type)
-			result += text
-			result += "\n"
+			if len(text) > 0 {
+				result += prefix(diff.Type)
+				result += text
+				result += "\n"
+			}
 		}
 	}
 	return &result
