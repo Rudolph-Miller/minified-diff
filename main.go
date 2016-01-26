@@ -10,7 +10,7 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.Name = "minified-diff"
-	app.Usage = "minified-diff file1.js file2.js"
+	app.Usage = "minified-diff file1.min.js file2.min.js"
 	app.Version = "0.0.1"
 
 	app.Action = func(c *cli.Context) {
